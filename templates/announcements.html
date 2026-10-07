@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-10">
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <h2 class="fw-bold text-slate m-0">Pengumuman Terkini</h2>
+            <a href="/dashboard" class="btn btn-outline-secondary rounded-pill px-4 fw-bold">Kembali</a>
+        </div>
+        
+        {% if announcements %}
+            {% for ann in announcements %}
+                <!-- Kotak pengumuman dengan garis kiri berwarna slate -->
+                <div class="card card-custom border-start border-4 border-slate mb-4 p-4 hover-lift">
+                    <h4 class="fw-bold text-slate">{{ ann.title }}</h4>
+                    <h6 class="text-muted mb-3">🕒 {{ ann.date }}</h6>
+                    <p class="mb-0 text-secondary">{{ ann.body }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="card card-custom p-5 text-center text-muted">
+                <h5 class="mb-0">Belum ada pengumuman saat ini.</h5>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

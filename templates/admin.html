@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Dashboard Admin: Data Tim</h2>
+        </div>
+        
+        <div class="table-responsive shadow-sm rounded">
+            <table class="table table-striped table-hover align-middle mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Tim</th>
+                        <th>Ketua</th>
+                        <th>Email</th>
+                        <th>Kampus</th>
+                        <th>Waktu Daftar</th>
+                        <th>URL Proyek (Ciphertext RSA)</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white">
+                    {% if teams %}
+                        <!-- Looping data tabel teams -->
+                        {% for t in teams %}
+                        <tr>
+                            <td>{{ t.id }}</td>
+                            <td class="fw-bold">{{ t.team_name }}</td>
+                            <td>{{ t.leader }}</td>
+                            <td>{{ t.email }}</td>
+                            <td>{{ t.campus }}</td>
+                            <td><small class="text-muted">{{ t.created_at }}</small></td>
+                            <td class="text-break" style="max-width: 250px;">
+                                {% if t.project_url %}
+                                    <!-- Menampilkan URL yang diamankan dengan RSA -->
+                                    <span class="font-monospace text-success small">{{ t.project_url }}</span>
+                                {% else %}
+                                    <span class="text-muted fst-italic">Belum ada submission</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="7" class="text-center py-4">Belum ada tim yang terdaftar di sistem.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

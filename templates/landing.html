@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    /* Kunci scroll untuk halaman landing */
+    body {
+        overflow: hidden;
+    }
+    
+    /* Gunakan 100vh karena sudah tidak ada navbar */
+    .landing-wrapper {
+        height: 95vh; /* 95vh agar proporsional dan tidak tertutup taskbar */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: -20px; /* Menarik konten sedikit ke atas untuk menyeimbangkan padding dari base.html */
+    }
+    
+    .container-sliding {
+        min-height: 500px !important;
+    }
+</style>
+
+<div class="landing-wrapper w-100">
+    <div class="text-center w-100">
+        
+        <h1 class="display-5 fw-bold text-slate mb-2">WebDev Competition 2026</h1>
+        <p class="text-muted mb-4">Silakan masuk menggunakan token, atau buat akun baru untuk tim Anda.</p>
+        
+        <div class="container-sliding mx-auto" id="container-sliding">
+            
+            <!-- FORM DAFTAR -->
+            <div class="form-container sign-up-container">
+                <form method="POST" action="/register" class="w-100">
+                    <h2 class="fw-bold text-slate mb-4">Create Account</h2>
+                    <input type="text" class="form-control custom-input mb-3 w-100" id="team_name" name="team_name" placeholder="Nama Tim" value="{{ form.team_name if form else '' }}" required>
+                    <input type="text" class="form-control custom-input mb-3 w-100" id="leader" name="leader" placeholder="Nama Ketua" value="{{ form.leader if form else '' }}" required>
+                    <input type="email" class="form-control custom-input mb-3 w-100" id="email" name="email" placeholder="Email Aktif" value="{{ form.email if form else '' }}" required>
+                    <input type="text" class="form-control custom-input mb-4 w-100" id="campus" name="campus" placeholder="Asal Kampus" value="{{ form.campus if form else '' }}" required>
+                    <button type="submit" class="custom-btn action-btn">SIGN UP</button>
+                </form>
+            </div>
+            
+            <!-- FORM LOGIN -->
+            <div class="form-container sign-in-container">
+                <form method="POST" action="/login" class="w-100">
+                    <h2 class="fw-bold text-slate mb-4">Sign in to Website</h2>
+                    <input type="password" class="form-control custom-input text-center mb-5 w-100" id="token" name="token" placeholder="Token Akses Tim" required>
+                    <button type="submit" class="custom-btn action-btn">SIGN IN</button>
+                </form>
+            </div>
+            
+            <!-- OVERLAY (Panel Gelap) -->
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left text-white">
+                        <h2 class="fw-bold mb-3">Welcome Back!</h2>
+                        <p class="mb-4">Untuk tetap terhubung dengan kami, silakan login dengan token tim Anda.</p>
+                        <button class="custom-btn-outline" id="signInBtn">SIGN IN</button>
+                    </div>
+                    <div class="overlay-panel overlay-right text-white">
+                        <h2 class="fw-bold mb-3">Halo, Teman!</h2>
+                        <p class="mb-4">Daftarkan tim Anda dan mulailah perjalanan WebDev bersama kami.</p>
+                        <button class="custom-btn-outline" id="signUpBtn">SIGN UP</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

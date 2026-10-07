@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8">
+        <div class="card-custom text-center border-0">
+            <div class="p-5 bg-slate text-white">
+                <h3 class="fw-bold mb-2">Pendaftaran Berhasil!</h3>
+                <p class="mb-0">Tim <span class="text-info fw-bold">{{ team.team_name }}</span> telah terdaftar.</p>
+            </div>
+            <div class="p-5 bg-white">
+                <p class="text-muted mb-4 fs-5">Berikut adalah token rahasia untuk login ke platform. <strong>Simpan baik-baik!</strong></p>
+                <h2 class="user-select-all bg-light p-4 border rounded font-monospace text-slate d-inline-block shadow-sm tracking-wide">{{ token }}</h2>
+                <div class="mt-5">
+                    <a href="/login" class="custom-btn">Lanjut ke Halaman Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

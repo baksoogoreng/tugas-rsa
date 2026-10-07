@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col-md-8">
+        <div class="mb-4">
+            <h2 class="fw-bold text-slate">Dashboard Tim</h2>
+            <p class="text-muted">Selamat datang, <strong class="text-slate">{{ team.team_name }}</strong> ({{ team.campus }})</p>
+        </div>
+
+        <!-- Box ini sudah tidak ada hover-nya -->
+        <div class="card card-custom p-4 mb-4">
+            <h5 class="fw-bold text-slate mb-3">Status Pengumpulan</h5>
+            {% if submission %}
+                <div class="p-3 mb-3 bg-light rounded border-start border-4 border-success">
+                    <strong>Status:</strong> ✅ Selesai<br>
+                    <strong>URL Proyek:</strong> <a href="{{ submission.project_url }}" target="_blank" class="text-decoration-none">{{ submission.project_url }}</a>
+                </div>
+                <a href="/submit" class="custom-btn mt-2">Perbarui Link</a>
+            {% else %}
+                <div class="p-3 mb-3 bg-light rounded border-start border-4 border-warning">
+                    <strong>Status:</strong> ❌ Belum Mengumpulkan
+                </div>
+                <a href="/submit" class="custom-btn mt-2">Kumpulkan Sekarang</a>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <!-- Box ini sudah tidak ada hover-nya -->
+        <div class="card card-custom p-4">
+            <h5 class="fw-bold text-slate mb-3">Navigasi</h5>
+            <div class="d-grid gap-2">
+                <!-- Class nav-btn ditambahkan untuk efek hover ke samping -->
+                <a href="/announcements" class="btn btn-light text-start border-0 bg-light p-3 nav-btn text-slate fw-bold">📢 Lihat Pengumuman</a>
+                <a href="/submit" class="btn btn-light text-start border-0 bg-light p-3 nav-btn text-slate fw-bold">🚀 Form Pengumpulan</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
