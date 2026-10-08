@@ -1,5 +1,5 @@
 """
-test_rsa.py - Tes sederhana di terminal. Jalankan: python3 test_rsa.py
+test_rsa.py - Tes sederhana di terminal. Jalankan: python test_rsa.py
 """
 
 import rsa
@@ -46,9 +46,34 @@ def test_token_palsu():
     print("[OK] Token asal-asalan ditolak:", alasan)
 
 
+def test_tanda_tangan():
+    """Tes: tanda tangan valid lolos, pesan yang diubah / tanda tangan salah gagal."""
+    public_key, private_key = rsa.generate_keys(bits=64)
+    sig = rsa.sign("LOMBA|7|123", private_key)
+    assert rsa.verify("LOMBA|7|123", sig, public_key)
+    assert not rsa.verify("LOMBA|8|123", sig, public_key)
+    assert not rsa.verify("LOMBA|7|123", sig + 1, public_key)
+    print("[OK] Tanda tangan valid lolos, pesan diubah / tanda tangan salah gagal")
+
+
+def test_token_dipalsukan_dengan_public_key():
+    """Tes: penyerang yang tahu PUBLIC KEY tetap tidak bisa membuat token sah."""
+    # Tanpa tanda tangan
+    palsu1 = rsa.encrypt("LOMBA|1|9999999999", token_service.PUBLIC_KEY)
+    ok, alasan = token_service.verify_token(palsu1)
+    assert not ok
+    # Dengan tanda tangan karangan
+    palsu2 = rsa.encrypt("LOMBA|1|9999999999|abc123", token_service.PUBLIC_KEY)
+    ok, alasan = token_service.verify_token(palsu2)
+    assert not ok
+    print("[OK] Token palsu buatan penyerang (tahu public key) ditolak:", alasan)
+
+
 if __name__ == "__main__":
     test_rsa_dasar()
+    test_tanda_tangan()
     test_token_valid()
     test_token_kedaluwarsa()
     test_token_palsu()
+    test_token_dipalsukan_dengan_public_key()
     print("\nSemua tes lulus.")
