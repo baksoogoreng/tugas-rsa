@@ -17,7 +17,7 @@ app = Flask(__name__)
 app.secret_key = "ganti-dengan-kunci-rahasia-sendiri"   # dipakai untuk pesan flash
 
 COOKIE_NAME = "auth_token"   # nama cookie penyimpan token di browser peserta
-TOKEN_HOURS = 24             # masa berlaku token (jam)
+TOKEN_HOURS = 24*14             # masa berlaku token 2 minggu
 ADMIN_USER = "admin"
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "admin123")
 

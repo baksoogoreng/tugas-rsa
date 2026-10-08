@@ -46,7 +46,7 @@ Implementasi ini bertujuan sebagai media pembelajaran, bukan sistem autentikasi 
 
 a) Kunci RSA yang digunakan hanya berukuran sekitar 128 bit agar proses demonstrasi cepat, padahal praktik nyata menggunakan minimal 2048 bit.
 
-b) Enkripsi dilakukan per karakter tanpa skema padding, sehingga karakter yang sama selalu menghasilkan ciphertext yang sama.
+b) Enkripsi dilakukan per karakter tanpa skema padding, sehingga karakter yang sama selalu menghasilkan ciphertext yang sama. Akibatnya, pihak yang memiliki beberapa token sah secara teori dapat menyusun token baru dari blok-blok tersebut. Kelemahan ini dapat diatasi dengan tanda tangan digital dan skema padding.
 
 c) Token hanya dienkripsi dan tidak ditandatangani; keamanannya bergantung pada kerahasiaan public key, padahal secara konsep public key boleh diketahui siapa saja.
 
